@@ -1,9 +1,21 @@
+import useAuthModal from "@/hooks/useAuthModal";
+import useUploadModal from "@/hooks/useUploadModal";
+import { useUser } from "@/hooks/useUser";
 import { ListMusic, Plus } from "lucide-react";
 import React from "react";
 
 const SongLibrary = () => {
+  const authModal = useAuthModal();
+  const {user} = useUser();
+  const uploadModal = useUploadModal();
+
   const onClick = () => {
     //Handle Upload
+    if(!user){
+      return authModal.onOpen();
+    }
+    // Todo Check for subscription
+    return uploadModal.onOpen();
   };
   return (
     <div className="flex flex-col">

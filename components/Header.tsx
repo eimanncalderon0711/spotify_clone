@@ -7,6 +7,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { ChevronLeft, ChevronRight, Home, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import toast from 'react-hot-toast';
 import { FaUserAlt } from 'react-icons/fa';
 import { twMerge } from 'tailwind-merge';
 
@@ -30,7 +31,9 @@ const Header: React.FC<HeaderProps> = ({children, classname}) => {
     router.refresh();
 
     if(error){
-        console.log(error)
+        toast.error(error.message);
+    }else{
+        toast.success('Logged out successfully!')
     }
   }
   return (
