@@ -22,8 +22,8 @@ const Modal: React.FC<ModalProps> = ({
         <Dialog.DialogOverlay className="bg-neutral-900/90 backdrop-blur-sm fixed inset-0"/>
         <Dialog.DialogContent 
             className="fixed w-full h-full border border-neutral-700 top-1/2 left-1/2 drop-shadow-md max-h-full 
-                        md:h-auto 
-                        md:max-h-[85vh] 
+                        md:h-auto
+                        md:max-h-[85vh]
                         md:w-[90vw] 
                         md:max-w-[450px]
                         -translate-x-1/2
