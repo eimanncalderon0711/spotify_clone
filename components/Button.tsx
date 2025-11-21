@@ -13,7 +13,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     ...props
 }, ref) => {
     return (
-        <button type={type} 
+        <button type={type} ref={ref} disabled={disabled} {...props}
             className={
                 twMerge(`w-full rounded-full
                 bg-green-500 border-transparent
