@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import SupabaseProvider from "@/providers/SupabaseProvider";
+import UserProvider from "@/providers/UserProvider";
+import ModalProvider from "@/providers/ModalProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,9 +37,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${font.variable} antialiased`}
       >
         <SupabaseProvider>
-          <Sidebar>
-            {children}
-          </Sidebar>
+          <UserProvider>
+            <ModalProvider/>
+            <Sidebar>
+              {children}
+            </Sidebar>
+          </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
