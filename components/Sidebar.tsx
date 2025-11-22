@@ -6,12 +6,14 @@ import React, { useMemo } from 'react'
 import { House, Library, Search } from 'lucide-react';
 import SideBarItem from '@/components/SideBarItem';
 import SongLibrary from '@/components/SongLibrary';
+import { Song } from '@/types';
 
 type SideBarProps = {
     children: React.ReactNode;
+    songs: Song[];
 }
 
-const Sidebar: React.FC<SideBarProps> = ({children}) => {
+const Sidebar: React.FC<SideBarProps> = ({children, songs}) => {
   
   const pathName = usePathname();
 
@@ -56,7 +58,7 @@ const Sidebar: React.FC<SideBarProps> = ({children}) => {
                 </div>
             </Box>
             <Box classname='h-full overflow-y-auto'>
-                <SongLibrary/>
+                <SongLibrary songs={songs}/>
             </Box>
         </div>
         <main className='h-full flex-1 overflow-y-auto p-2'>

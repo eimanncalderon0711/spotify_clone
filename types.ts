@@ -1,5 +1,14 @@
 import Stripe from "stripe";
 
+export interface Song{
+    id: string;
+    user_id: string;
+    singer: string;
+    title: string;
+    song_url: string;
+    img_url: string;
+}
+
 export interface UserDetails{
     id: string;
     first_name: string;

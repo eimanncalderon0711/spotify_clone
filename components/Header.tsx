@@ -3,6 +3,7 @@
 import Button from '@/components/Button';
 import useAuthModal from '@/hooks/useAuthModal';
 import { useUser } from '@/hooks/useUser';
+import { createSupabaseClient } from '@/utils/supabase/client';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { ChevronLeft, ChevronRight, Home, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -20,9 +21,8 @@ const Header: React.FC<HeaderProps> = ({children, classname}) => {
     const {onOpen} = useAuthModal();
     const router = useRouter();
 
-    const supabaseClient = useSupabaseClient();
+    const supabaseClient = createSupabaseClient();
     const {user} = useUser();
-
 
   const handleLogout = async () => {
     //Handle Logout in the future

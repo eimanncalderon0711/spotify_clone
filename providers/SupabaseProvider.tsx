@@ -1,20 +1,40 @@
 "use client"
 
-import React from 'react'
-import {Database} from '@/database.types'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import React, { useState } from 'react'
+import { createBrowserClient } from '@supabase/ssr'
+import type { SupabaseClient } from '@supabase/supabase-js'
+import { Database } from '@/database.types'
 
-type SupabaseProviderProps = {
-    children: React.ReactNode;
+type SupabaseContextType = {
+  supabase: SupabaseClient<Database>
 }
 
-const SupabaseProvider: React.FC<SupabaseProviderProps> = ({children}) => {
-  const [supabaseClient] = React.useState(() => createClientComponentClient<Database>());
+const SupabaseContext = React.createContext<SupabaseContextType | undefined>(undefined)
+
+export const useSupabase = () => {
+  const context = React.useContext(SupabaseContext)
+  if (!context) {
+    throw new Error('useSupabase must be used within SupabaseProvider')
+  }
+  return context
+}
+
+type SupabaseProviderProps = {
+  children: React.ReactNode
+}
+
+const SupabaseProvider: React.FC<SupabaseProviderProps> = ({ children }) => {
+  const [supabase] = useState(() =>
+    createBrowserClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+    )
+  )
+
   return (
-    <SessionContextProvider supabaseClient={supabaseClient as any}>
+    <SupabaseContext.Provider value={{ supabase }}>
       {children}
-    </SessionContextProvider>
+    </SupabaseContext.Provider>
   )
 }
 
